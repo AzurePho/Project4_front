@@ -1,35 +1,40 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { Route, Routes } from "react-router-dom";
+import "./App.css";
+import Header from "./components/Header";
+import LandingPage from "./pages/LandingPage";
+import GamesPage from "./pages/GamesPage";
+import GenresPage from "./pages/GenresPage";
+import RegisterPage from "./pages/RegisterPage";
+import GamePage from "./pages/GamePage";
+import AddGamePage from "./pages/AddGamePage";
+// import GenrePage from "./pages/GenrePage";
+import DevsPage from "./pages/DevsPage";
+import { useParams } from "react-router-dom";
+import { QueryClient, QueryClientProvider } from "react-query";
+
+const queryClient = new QueryClient();
 
 function App() {
-  const [count, setCount] = useState(0)
-
+  let params = useParams();
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+    <QueryClientProvider client={queryClient}>
+      <div className="App">
+        <Header />
+        <Routes>
+          <Route path="/" element={<LandingPage />} />
+          <Route path="/Games" element={<GamesPage />} />
+          <Route path="/Game/:id" element={<GamePage params={params} />} />
+          <Route path="/Game/:id" element={<GamePage params={params} />} />
+          <Route path="/Genres" element={<GenresPage />} />
+          {/* <Route path="/Genre/:id" element={<GenrePage params={params} />} /> */}
+          <Route path="/Devs" element={<DevsPage />} />
+          {/* <Route path="/Dev/:id" element={<DevPage params={params} />} /> */}
+          <Route path="/Register" element={<RegisterPage />} />
+          <Route path="/AddGame" element={<AddGamePage />} />
+        </Routes>
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    </QueryClientProvider>
+  );
 }
 
-export default App
+export default App;

@@ -1,0 +1,28 @@
+.header {
+  width: 83vw;
+  padding: 24px 8vw;
+  overflow-x: hidden;
+  //   border: 1px solid green;
+
+  & ul {
+    display: flex;
+    list-style: none;
+    font-size: xx-large;
+  }
+
+  &__link {
+    margin-right: 20px;
+    color: white;
+  }
+
+  &__auth-links {
+    display: flex;
+    margin-left: auto;
+    align-items: center;
+  }
+
+  &__auth-links > * {
+    margin-left: 20px;
+    color: white;
+  }
+}

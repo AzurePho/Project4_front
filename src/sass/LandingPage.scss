@@ -1,0 +1,18 @@
+.page {
+  display: flex;
+  height: 100vh;
+
+  &__login,
+  &__register {
+    width: 50%;
+  }
+
+  @media screen and (max-width: 768px) {
+    flex-direction: column;
+
+    &__login,
+    &__register {
+      width: 100%;
+    }
+  }
+}
