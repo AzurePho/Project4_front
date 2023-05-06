@@ -17,7 +17,7 @@ function AddGameForm() {
     title: "",
     cover_image: "",
     dev: "",
-    genre: [],
+    genres: [],
   });
   //   console.log("Genres data:", genresData);
   //   console.log("Genres isSuccess:", isGenreSucess);
@@ -27,16 +27,25 @@ function AddGameForm() {
   const handleChange = (e) => {
     const name = e.target.name;
     const value =
-      e.target.name === "dev" ? parseInt(e.target.value) : e.target.value;
+      e.target.name === "dev" || e.target.value === "genres"
+        ? parseInt(e.target.value)
+        : e.target.value;
     console.log(value);
-    setFormData({
-      ...formData,
-      [name]: value,
-    });
+    if (e.target.name === "genres") {
+      setFormData({
+        ...formData,
+        [name]: [...formData[name], parseInt(value)],
+      });
+    } else {
+      setFormData({
+        ...formData,
+        [name]: value,
+      });
+    }
     console.log(formData);
   };
 
-  const handleSubmit = (e, formData) => {
+  const handleSubmit = (e) => {
     console.log(formData);
     e.preventDefault();
 
@@ -105,11 +114,11 @@ function AddGameForm() {
         </select>
       </div>
       <div className="form-group">
-        <label htmlFor="genre">Genre:</label>
+        <label htmlFor="genres">Genre:</label>
         <select
-          id="genre"
-          name="genre"
-          value={formData.genre}
+          id="genres"
+          name="genres"
+          value={formData.genres}
           onChange={handleChange}
           required
         >
